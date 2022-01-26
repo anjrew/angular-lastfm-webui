@@ -1,0 +1,37 @@
+<div style="position: relative; padding: 1rem;">
+
+
+  <h2>Top 10 Artists from</h2>
+  <mat-form-field appearance="fill">
+    <mat-label>Select Country</mat-label>
+    <mat-select [ngrxFormControlState]="(countryFormControl$ | async)!">
+
+      <mat-option value="spain">Spain</mat-option>
+      <mat-option value="germany">Germany</mat-option>
+      <mat-option value="france">France</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading$ |async"></mat-progress-bar>
+
+  <div *ngIf="topArtists$ | async as artists" style="display: flex; flex-wrap: wrap; height: calc(100vh - 216px);
+    overflow-y: scroll; ">
+
+    <mat-card *ngFor="let artist of artists.artist; trackBy:trackBy" style="margin: 1rem; width: 10rem; height: 13rem;">
+      <mat-card-header>
+        <mat-card-title style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden; width: 9rem;">{{ artist.name }}</mat-card-title>
+      </mat-card-header>
+      <img style="height: 125px;
+    width: calc(100% + 32px); object-fit:cover" matCardImage [src]="artist.image[3]['#text']">
+      <mat-card-actions align="end">
+        <button mat-raised-button color="primary"
+          [routerLink]="['../../details' , getEncoded(artist.name)]">Details</button>
+
+      </mat-card-actions>
+
+    </mat-card>
+
+  </div>
+
+
+</div>

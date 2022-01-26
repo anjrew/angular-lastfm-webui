@@ -1,27 +1,38 @@
-# MyLastFmApp
+# My Last Ever Fm App
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.4.
+This app interacts with the Last FM API to get data on Artists Tracks and Albums.
 
-## Development server
+It has four features:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Show top artists by country
+- Show details of artists
+- Search for artists
+- Get a Last FM web session token (for no real reason but to prove that it can).
 
-## Code scaffolding
+## Getting started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Install the dependencies with `npm install`
 
-## Build
+### Development server
+
+Run `ng start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+### Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+## Get a web session token
+This feature depends on a secrets file being available in the project. The file is ignored by git and is not part of the repository. It has to be added manually.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The file location is: src\app\resources\secrets\last-fm.secrets.ts
 
-## Running end-to-end tests
+```typescript
+import { LastFmCredentials } from "src/app/data-types/interfaces/lastfm-credentials.interface";
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+export const lastFMCreds: LastFmCredentials = {
+  apiKey: `[YOUR API KEY]`,
+  sharedSecret: `[YOUR SECRET]`,
+};
+```
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Fill in the details that you obtain from LastFM on account creation. https://www.last.fm/api/account/create

@@ -1,0 +1,27 @@
+<mat-toolbar color="primary" style="align-items: baseline;">
+
+  <div class="title" style="cursor:pointer" [routerLink]="['./main']">My Last Ever FM </div>
+
+  <div style="width: 100%; display: flex; justify-content: space-between;">
+    <div style="margin-left: 3rem;">
+      <mat-label>Artist Search:</mat-label>
+      <mat-form-field *ngIf="(artistSearchControl$ | async) as control" class="example-full-width" appearance="legacy"
+        style="margin-left: 1rem;">
+        <input type="text" matInput [ngrxFormControlState]="control!" [matAutocomplete]="auto"
+          (keydown.enter)="reload(['../../details' , getEncoded(control.value)])">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+          <mat-option *ngFor="let option of filteredOptions$ | async" [value]="option.name"
+            [routerLink]="['../../details' , getEncoded(option.name)]"
+            (click)="reload(['../../details' , getEncoded(option.name)])">
+            {{option.name}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+    </div>
+
+    <button mat-button (click)="getToken()">Get Web Session Token</button>
+
+  </div>
+</mat-toolbar>
+
+<ng-content></ng-content>

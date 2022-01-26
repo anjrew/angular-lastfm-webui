@@ -1,0 +1,8 @@
+{
+  "/2.0/*": {
+    "target": "http://ws.audioscrobbler.com",
+    "secure": false,
+    "logLevel": "debug",
+    "changeOrigin": true
+  }
+}

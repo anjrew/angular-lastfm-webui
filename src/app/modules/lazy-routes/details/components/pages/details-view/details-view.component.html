@@ -1,0 +1,40 @@
+<div style="position: relative; height: calc(100vh - 100px); overflow-y: scroll; padding: 1rem;">
+  <mat-progress-bar *ngIf="isLoading$ |async " mode="indeterminate"></mat-progress-bar>
+
+
+  <mat-card style="margin: 3rem" *ngIf="artistInfo$ | async as artistInfo">
+    <img [src]="artistInfo.image[4]['#text']" style="width: 100%; height: 300px; object-fit: cover;">
+
+    <h1>Name: {{artistInfo.name}}</h1>
+    <h1>Listeners: {{ artistInfo.stats.listeners }}</h1>
+    <h1>Play Count: {{ artistInfo.stats.playcount }}</h1>
+
+  </mat-card>
+
+  <div  style="display:flex; flex-wrap: wrap; width: 90%;" *ngIf="(tracks$ |async) as tracks">
+
+    <h2>Tracks</h2>
+    <mat-card *ngFor="let track of tracks" class="info-card">
+      <img [src]="track.image[3]['#text']"  >
+
+      <h5>Name: {{track.name}}</h5>
+      <h6>Play Count: {{ track.playcount }}</h6>
+
+    </mat-card>
+
+  </div>
+
+  <div style="display:flex; flex-wrap: wrap; width: 90%;" *ngIf="(albums$ |async) as albums">
+
+    <h2>Albums</h2>
+    <mat-card *ngFor="let album of albums" class="info-card">
+      <img [src]="album.image[3]['#text']" class="info-image">
+
+      <h5>Name: {{album.name}}</h5>
+      <h6>Play Count: {{ album.playcount }}</h6>
+
+    </mat-card>
+
+  </div>
+
+</div>
