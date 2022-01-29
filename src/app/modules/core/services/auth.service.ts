@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { lastFMCreds } from 'src/app/resources/secrets/last-fm.secrets';
 import { AppHttpService } from './app-http.service';
 import { LocalStorageService } from './local-storage.service';
 import { Md5 } from 'ts-md5/dist/md5';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AuthService {
-  private authToken = '';
+  private authToken = ''
   public bearerToken = '';
 
   constructor(
@@ -29,17 +29,18 @@ export class AuthService {
 
       if (this.bearerToken) {
         subscriber.next(true);
+        return
       }
 
       /**If no bearer token is found check for a authentification token in the Url 'token' parameter*/
 
       const urlAuthToken = this.authToken;
-      const apiKey = lastFMCreds.apiKey;
-      const secret = lastFMCreds.sharedSecret;
+      const apiKey = environment.lastFMCreds.apiKey;
+      const secret = environment.lastFMCreds.sharedSecret;
 
       if (!urlAuthToken) {
         const location = window.location;
-        /* Make a call with the API key for the Auth Token */
+        /* Make open the last FM API website for Authentification */
         location.href = `http://www.last.fm/api/auth?api_key=${apiKey}&cb=${location.origin}`;
       } else {
         /* Get a Web service session */

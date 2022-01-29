@@ -2,8 +2,11 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { LastFmCredentials } from "src/app/data-types/interfaces/lastfm-credentials.interface";
+
 export const environment = {
-  production: false
+  production: false,
+  lastFMCreds: window['env' as any]['lastFMCreds' as any] as unknown as LastFmCredentials,
 };
 
 /*
